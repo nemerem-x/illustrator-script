@@ -1,2 +1,2 @@
-# Aobe Illustrator Theme Generator
+# Adobe Illustrator Theme Generator
 Theme Generator Script
