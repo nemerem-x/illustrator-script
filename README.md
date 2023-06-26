@@ -26,9 +26,10 @@ $ npm i types-for-adobe
 ```
 # install VScode
 
-# Install extensions
+# Install vscode extensions
 $ Adobe Script Runner.
-$ ExtendScript. (This second extension will ensure syntax highlighting and that you don't get unnecessary errors when running a .jsx file.)
+$ ExtendSript Debugger.
+$ ExtendScript. (This third extension will ensure syntax highlighting and that you don't get unnecessary errors when running a .jsx file.)
 
 ```
 
@@ -41,6 +42,6 @@ tsconfig.json and add '{"compilerOptions":{"module":"none","noLib":true}}'
 `Ctrl + Shift + B` and select `tsc build - illustrator-script/tsconfig.json` to compile tsc to js
 
 #Run JS
-hit `F5` to run
+hit `F5` when in js file to run
 
 ```
