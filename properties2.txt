@@ -1,0 +1,27 @@
+##ScriptUI dropdownlist object##
+titleLayout: [object TitleLayout]
+title: 
+items: Vintage,Futuristic,Minimalistic
+itemSize: 71,20
+selection: 1
+active: false
+shortcutKey: undefined
+graphics: [object ScriptUIGraphics]
+visible: true
+bounds: 43,0,243,24
+location: 43,0
+maximumSize: 1870,1030
+minimumSize: 200,22
+preferredSize: 98,24
+size: 200,24
+windowBounds: 66,70,266,94
+alignment: undefined
+children: Vintage,Futuristic,Minimalistic
+properties: undefined
+enabled: true
+helpTip: 
+indent: undefined
+parent: [object Group]
+textDirection: null
+window: [object Window]
+type: dropdownlist

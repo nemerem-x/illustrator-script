@@ -1,0 +1,12 @@
+##ScriptUI dropdownlist object## key: Selection ##
+checked: undefined
+expanded: false
+index: 0
+selected: true
+subItems: 
+icon: undefined
+text: Vintage
+properties: undefined
+parent: [object DropDownList]
+type: item
+enabled: true
