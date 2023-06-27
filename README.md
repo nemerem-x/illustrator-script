@@ -45,6 +45,13 @@ tsconfig.json and add '{"compilerOptions":{"module":"none","noLib":true}}'
 hit `F5` when in js file to run
 
 ```
+### NOTE: ###
+1. The .js extension build can be changed to .jsx
+2. Add the following at the top of the .jsx file:
+#target illustrator
+#targetengine main
+3. Copy .jsx to Illustrator scripts folder
+4. Enjoy!!!
 
 # References
 ## Illustrator Scripting Guide
