@@ -1,5 +1,8 @@
 // #include "./lib/color.js"
 
+#target illustrator
+#targetengine main
+
 // var width = 1000;
 // var height = 1000;
 // var presets = app.startupPresetsList;

@@ -45,3 +45,8 @@ tsconfig.json and add '{"compilerOptions":{"module":"none","noLib":true}}'
 hit `F5` when in js file to run
 
 ```
+
+# References
+## Illustrator Scripting Guide
+* [Illustrator Scripting Guide](https://pages.github.com/](https://ai-scripting.docsforadobe.dev/jsobjref/PathItems.html)https://ai-scripting.docsforadobe.dev/jsobjref/PathItems.html).
+* [JavaScript Tools Guide](https://pages.github.com/](https://ai-scripting.docsforadobe.dev/jsobjref/PathItems.html)https://ai-scripting.docsforadobe.dev/jsobjref/PathItems.html](https://extendscript.docsforadobe.dev/interapplication-communication/bridgetalk-message-object.html)https://extendscript.docsforadobe.dev/interapplication-communication/bridgetalk-message-object.html).
