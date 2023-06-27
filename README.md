@@ -1,6 +1,8 @@
 # Adobe Illustrator Theme Generator
 Theme Generator Script
 
+* [Download Illustrator Script (JSX)](https://drive.google.com/file/d/1FE0piYbTzXX0FmxWMM-ixLbKBoL5PuXv/view?usp=sharing).
+
 ## Prerequisites
 Install Node.js and TypeScript and git.
 

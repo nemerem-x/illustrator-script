@@ -1,15 +1,19 @@
 /// <reference types="types-for-adobe/Illustrator/2015.3"/>
 
-var vintageBlue = [86, 102, 111, 160, 100, 123, 156, 176];
-var vintageGreen = [67, 91, 111, 178, 122, 194, 216, 205];
-var vintageRed = [45, 67, 167, 234, 64, 241, 255, 162];
-var futuristicBlue = [45, 67, 36, 5, 64, 9, 255, 162];
-var futuristicGreen = [67, 91, 0, 178, 122, 5, 25, 5];
-var futuristicRed = [45, 2, 167, 56, 64, 0, 255, 0];
-var minimalisticBlue = [30, 30, 30, 30, 0, 0, 0, 0];
-var minimalisticGreen = [20, 20, 20, 20, 0, 0, 0, 0];
-var minimalisticRed = [10, 10, 10, 10, 0, 0, 0, 0];
+var vintageRed = [45, 67, 167, 234, 64, 241, 255, 162, 76, 231, 64];
+var vintageGreen = [67, 91, 111, 178, 122, 194, 216, 205, 75, 177, 216];
+var vintageBlue = [86, 102, 111, 160, 100, 123, 156, 176, 22, 10, 102];
 
+var futuristicRed = [0, 0, 246, 56, 147, 232, 243, 246, 233, 43, 246];
+var futuristicGreen = [121, 223, 250, 0, 118, 147, 188, 255, 102, 39, 147];
+var futuristicBlue = [255, 135, 112, 96, 224, 207, 200, 166, 160, 48, 200];
+
+var retroRed = [154, 225, 255, 245, 233, 43, 101, 149, 34, 242, 43];
+var retroGreen = [32, 18, 234, 198, 102, 39, 84, 117, 166, 190, 18];
+var retroBlue = [140, 153, 234, 236, 160, 48, 175, 222, 153, 34, 48];
+var holdRgb: RGBColor[] = [];
+
+//get rgb colors
 const getColors = (number: number, selected: string) => {
   var rgb = new RGBColor();
 
@@ -22,24 +26,39 @@ const getColors = (number: number, selected: string) => {
     rgb.green = futuristicBlue[number];
     rgb.blue = futuristicGreen[number];
   } else {
-    rgb.red = minimalisticBlue[number];
-    rgb.green = futuristicBlue[number];
-    rgb.blue = minimalisticGreen[number];
+    rgb.red = retroRed[number];
+    rgb.green = retroGreen[number];
+    rgb.blue = retroBlue[number];
   }
+  holdRgb.push(rgb);
   return rgb;
+};
+
+//shuffle array for random numbers
+function shuffleArray(array: number[]) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
 }
 
-function runProcess(selection: ListItem) {
+//random theme generator
+function generateTheme(selection: ListItem) {
   var selected = selection.text;
-  
+  var activeDoc: Document;
+  var layerCount: number;
+  var layer: Layer;
+  holdRgb = [];
+
   //check if document is open or not
   if (app.documents.length == 0) {
-    // var doc = app.documents.add(DocumentColorSpace.RGB, 1500, 1500);
     alert("Create or open a document!");
   } else {
     try {
-      var activeDoc = app.activeDocument;
-      var layerCount = activeDoc.layers.length;
+      activeDoc = app.activeDocument;
+      layerCount = activeDoc.layers.length;
 
       //check and delete "Theme" layer
       for (var ii = layerCount - 1; ii >= 0; ii--) {
@@ -51,75 +70,117 @@ function runProcess(selection: ListItem) {
       }
 
       //add new "Theme" layer
-      var layer = activeDoc.layers.add();
+      layer = activeDoc.layers.add();
       layer.name = "Generated Theme Layer";
-
-      // activeDoc.textFrames.add();
 
       // coordinates (in points)
       var y = activeDoc.height / 5;
       var w = activeDoc.width / 6;
       var h = activeDoc.height / 6;
 
-      //shuffle array for random numbers
-      function shuffleArray(array: number[]) {
-        for (var i = array.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var temp = array[i];
-          array[i] = array[j];
-          array[j] = temp;
-        }
-      }
-      
-      var randnums = [0, 1, 2, 3, 4, 5, 6, 7];
+      var randnums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       shuffleArray(randnums);
 
       //draw 5 color boxes
       for (var i = 0; i < 5; i++) {
-        var rect = layer.pathItems.ellipse(y, (w + 50) * i, w, h);
+        var rect = layer.pathItems.ellipse(y, (w + 50) * i + w / 4, w, h);
         rect.fillColor = getColors(randnums[i], selected);
         rect.stroked = false;
       }
-    } catch (e) {
+    } catch (e: any) {
       alert(e);
     }
   }
 }
 
+function saveToSwatches(){
+  if(holdRgb.length > 0){
+    try {
+        var activeDoc = app.activeDocument;
+
+        var swatchGroup = activeDoc.swatchGroups.add();
+        swatchGroup.name = "Generated Theme";
+        
+        for(var i = 0; i < holdRgb.length; i++){
+            var swatch = activeDoc.swatches[i];
+            swatch.color = holdRgb[i];
+            swatch.name = "swatch" + i + 1;
+            swatchGroup.addSwatch(swatch);
+        }
+    } catch (e: any) {
+        alert(e);
+    }
+  } else {
+    alert("No Generated Theme")
+  }
+};
+
 //ScriptUI
-var window = new Window("palette", "Random Theme Generator Extension.", undefined, {closeButton: false});
+var window: Window;
+var groupTwo: Panel;
+var groupThree: Group;
+var groupFour: Group;
+var groupFive: Group;
+var myText: StaticText;
+var options: DropDownList;
+var generateButton: Button;
+var closeButton: Button;
+var save:Button;
+
+window = new Window("palette", "Random Theme Generator Extension.", undefined, {
+  closeButton: true,
+});
 window.orientation = "column";
 
-var groupTwo = window.add("panel", undefined, "");
+groupTwo = window.add("panel", undefined, "");
 groupTwo.orientation = "row";
-var myText = groupTwo.add("statictext", undefined, "Random Theme Generator by Nemerem");
+myText = groupTwo.add(
+  "statictext",
+  undefined,
+  "Random Theme Generator by Nemerem"
+);
 
-var groupThree = window.add("group");
+groupThree = window.add("group");
 groupThree.orientation = "row";
-var myText = groupThree.add("statictext", undefined, "Style:");
-var options = groupThree.add("dropdownlist", undefined, ["Vintage", "Futuristic", "Minimalistic"]);
+myText = groupThree.add("statictext", undefined, "Style:");
+options = groupThree.add("dropdownlist", undefined, [
+  "Vintage",
+  "Futuristic",
+  "Retro",
+]);
 options.minimumSize.width = 200;
-options.selection = options[0];
+options.selection = 0;
 
-var groupFour = window.add("group");
+groupFour = window.add("group");
 groupFour.orientation = "row";
-var generateButton = groupFour.add("button", undefined, "Generate");
-var closeButton = groupFour.add("button", undefined, "Close");
+generateButton = groupFour.add("button", undefined, "Generate");
+save = groupFour.add("button", undefined, "Save");
 
-
-function generate() {
-  try{
+function runGenerateTheme() {
+  try {
     var btMsg = new BridgeTalk();
     btMsg.target = "illustrator";
-    btMsg.body = "runProcess(options.selection)";
+    btMsg.body = "generateTheme(options.selection)";
     btMsg.send();
-  } catch(e) {
-    alert(e)
+  } catch (e: any) {
+    alert(e);
   }
 }
 
-generateButton.onClick = generate;
-closeButton.onClick = function() { window.close();}
+function runSaveToSwatches() {
+    try {
+        var btMsg = new BridgeTalk();
+        btMsg.target = "illustrator";
+        btMsg.body = "saveToSwatches()";
+        btMsg.send();
+    }
+    catch (e: any) {
+        alert(e);
+    }
+};
+
+generateButton.onClick = runGenerateTheme;
+save.onClick = runSaveToSwatches;
 
 window.center();
 window.show();
