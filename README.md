@@ -7,7 +7,7 @@ Install Node.js and TypeScript and git.
 ## Project Setup
 ```
 # Install 
-$ git clone 
+$ git clone https://github.com/nemerem-x/illustrator-script.git
 
 # Change directory to project
 $ cd illustrator-script
