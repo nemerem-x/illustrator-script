@@ -7,28 +7,35 @@ Theme Generator Script
 Install Node.js and TypeScript and git.
 
 ## Project Setup
+
+### Clone Project 
 ```
-# Install 
-$ git clone https://github.com/nemerem-x/illustrator-script.git
+git clone https://github.com/nemerem-x/illustrator-script.git
+```
 
-# Change directory to project
-$ cd illustrator-script
+### Change directory to project
+```
+cd illustrator-script
+```
 
-# Install dependencies
-$ npm install
-
+### Install dependencies
+```
+npm install
+```
 or
 
-# install types-for-adobe
-$ npm init -y
-$ npm i types-for-adobe
+### install types-for-adobe
+```
+npm init -y
+```
+```
+npm i types-for-adobe
 ```
 
 ## VScode Setup
-```
-# install VScode
 
-# Install vscode extensions
+### install VScode and Extensions
+```
 $ Adobe Script Runner.
 $ ExtendSript Debugger.
 $ ExtendScript. (This third extension will ensure syntax highlighting and that you don't get unnecessary errors when running a .jsx file.)
@@ -37,8 +44,8 @@ $ ExtendScript. (This third extension will ensure syntax highlighting and that y
 
 ## Config and Run Script
 ```
-# create tsconfig.json
-tsconfig.json and add '{"compilerOptions":{"module":"none","noLib":true}}'
+create tsconfig.json
+Add: '{"compilerOptions":{"module":"none","strict": true, "noLib":true}}'
 
 # compile typescript files
 `Ctrl + Shift + B` and select `tsc build - illustrator-script/tsconfig.json` to compile tsc to js
